@@ -69,8 +69,10 @@ def normalize_bbox(bbox, rows, cols):
     """
     (x_min, y_min, x_max, y_max), tail = bbox[:4], tuple(bbox[4:])
 
-    if x_min < 0 or y_min < 0:
-        raise ValueError("either x_min or y_min or both is(are) a negative integer(s)")
+    if x_min < 0:
+        print("received x_min: {x_min} < 0.0")
+    if y_min < 0:
+        print("received y_min: {y_min} < 0.0")
     if rows <= 0:
         raise ValueError("Argument rows must be positive integer")
     if cols <= 0:
@@ -79,6 +81,10 @@ def normalize_bbox(bbox, rows, cols):
     x_min, x_max = x_min / cols, x_max / cols
     y_min, y_max = y_min / rows, y_max / rows
 
+    if x_min < 0:
+        x_min = 0.0
+    if y_min < 0:
+        y_min = 0.0
     return (x_min, y_min, x_max, y_max) + tail
 
 
